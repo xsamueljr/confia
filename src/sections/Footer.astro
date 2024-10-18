@@ -1,0 +1,27 @@
+---
+import instagramIcon from '@public/instagram.svg'
+import twitterIcon from '@public/twitter.svg'
+import tiktokIcon from '@public/music.svg'
+
+import { SOCIAL_MEDIA } from '../constants'
+---
+<footer class="bg-blue-800 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <p>&copy; 2024 ConfIA. Todos los derechos reservados.</p>
+        </div>
+        <div class="flex space-x-4">
+          <a href={SOCIAL_MEDIA.INSTAGRAM} class="hover:text-blue-300 transition-colors duration-300">
+            <img loading="lazy" src={instagramIcon.src} alt="Logo de Instagram" class="w-6 h-6" />
+          </a>
+          <a href={SOCIAL_MEDIA.TWITTER} class="hover:text-blue-300 transition-colors duration-300">
+            <img loading="lazy" src={twitterIcon.src} alt="Logo de Twitter / X" class="w-6 h-6" />
+          </a>
+          <a href={SOCIAL_MEDIA.TIKTOK} class="hover:text-blue-300 transition-colors duration-300">
+            <img loading="lazy" src={tiktokIcon.src} alt="Logo de Tik Tok" class="w-6 h-6" />
+          </a>
+        </div>
+      </div>
+    </div>
+</footer>

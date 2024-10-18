@@ -1,0 +1,28 @@
+---
+import Layout from "@layouts/Layout.astro"
+
+type Props = {
+    text?: string
+}
+
+const text = Astro.props.text ?? "COME BACK LATER"
+---
+
+<Layout title="In progress">
+    <div>
+        <h1>{text}</h1>
+    </div>
+</Layout>
+
+<style>
+    div {
+        display: flex;
+        justify-content: center;
+        vertical-align: middle;
+    }
+
+    h1 {
+        font-size: larger;
+    }
+
+</style>

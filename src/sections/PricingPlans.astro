@@ -1,0 +1,32 @@
+---
+import Plan from "@components/Plan.astro"
+
+const plans = [
+  {
+    name: 'Normal',
+    price: 'Gratis',
+    features: ['Detección básica de phishing', 'Actualizaciones mensuales', 'Soporte por email'],
+  },
+  {
+    name: 'Premium',
+    price: 'Por definir',
+    features: ['Detección avanzada de phishing', 'Actualizaciones semanales', 'Soporte prioritario', 'Protección en tiempo real'],
+  },
+  {
+    name: 'Empresarial',
+    price: 'Por definir',
+    features: ['Detección personalizada', 'Actualizaciones diarias', 'Soporte 24/7', 'Integración con sistemas empresariales', 'Informes detallados'],
+  },
+]
+---
+
+<div class="mb-16">
+  <h2 class="text-3xl font-bold text-blue-800 text-center mb-8">Nuestros Planes</h2>
+  <div class="grid md:grid-cols-3 gap-8">
+    {plans.map((plan) => (
+      <Plan name={plan.name} 
+      price={plan.price} 
+      features={plan.features}/>
+    ))}
+  </div>
+</div>

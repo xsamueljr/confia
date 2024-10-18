@@ -1,0 +1,30 @@
+---
+import Check from '@icons/Check.astro'
+
+type Props = {
+    name: string,
+    price: string,
+    features: string[]
+}
+
+const { name, price, features } = Astro.props
+
+if (!features || features.length === 0) {
+    throw new Error(`The plan "${name}" has no features`)
+}
+---
+<div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <h3 class="text-2xl font-bold text-blue-600 mb-4">{name}</h3>
+    <p class="text-3xl font-bold mb-6">{price}</p>
+    <ul class="space-y-2 mb-6">
+      {features.map((feature) => (
+        <li class="flex items-center">
+          <Check />
+          <span>{feature}</span>
+        </li>
+      ))}
+    </ul>
+    <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300">
+      Elegir Plan
+    </button>
+</div>
