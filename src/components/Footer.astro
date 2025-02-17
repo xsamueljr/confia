@@ -1,0 +1,194 @@
+---
+import { getLangFromUrl, useTranslations } from '../utils/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">
+          <span class="logo-text">confIA</span>
+        </a>
+        <p class="footer-description">{t('footer.description')}</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/confia_official_/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/@confia_official" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+            </svg>
+          </a>
+          <a href="https://x.com/ConfIA_Oficial" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X (Twitter)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-nav-group">
+          <h3 class="footer-nav-title">{t('footer.product.title')}</h3>
+          <ul class="footer-nav-list">
+            <li><a href="#features">{t('footer.product.features')}</a></li>
+            <li><a href="#pricing">{t('footer.product.pricing')}</a></li>
+            <li><a href="#download">{t('footer.product.download')}</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-group">
+          <h3 class="footer-nav-title">{t('footer.company.title')}</h3>
+          <ul class="footer-nav-list">
+            <li><a href="/about">{t('footer.company.about')}</a></li>
+            <li><a href="/blog">{t('footer.company.blog')}</a></li>
+            <li><a href="#contact">{t('footer.company.contact')}</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-group">
+          <h3 class="footer-nav-title">{t('footer.legal.title')}</h3>
+          <ul class="footer-nav-list">
+            <li><a href="/privacy">{t('footer.legal.privacy')}</a></li>
+            <li><a href="/terms">{t('footer.legal.terms')}</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright">
+        © {currentYear} confIA. {t('footer.rights')}
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-secondary-100);
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .footer-logo {
+    text-decoration: none;
+  }
+
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .footer-description {
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .social-links {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  .social-link {
+    color: var(--color-text);
+    transition: color 0.2s ease;
+  }
+
+  .social-link:hover {
+    color: var(--color-primary);
+  }
+
+  .footer-nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .footer-nav-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-heading);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .footer-nav-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .footer-nav-list a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-nav-list a:hover {
+    color: var(--color-primary);
+  }
+
+  .footer-bottom {
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-secondary-300);
+    text-align: center;
+  }
+
+  .copyright {
+    color: var(--color-text);
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    .footer-nav {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-lg);
+    }
+
+    .footer-brand {
+      text-align: center;
+      align-items: center;
+    }
+
+    .social-links {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-nav {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+</style>

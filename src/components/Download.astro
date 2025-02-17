@@ -1,0 +1,139 @@
+---
+import { getLangFromUrl, useTranslations } from '../utils/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="download" class="download">
+  <div class="container">
+    <div class="download-header">
+      <h2 class="section-title">{t('download.title')}</h2>
+      <p class="section-subtitle">{t('download.subtitle')}</p>
+    </div>
+
+    <div class="download-grid">
+      <div class="download-card">
+        <div class="download-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="12" r="4"/>
+            <line x1="21.17" y1="8" x2="12" y2="8"/>
+            <line x1="3.95" y1="6.06" x2="8.54" y2="14"/>
+            <line x1="10.88" y1="21.94" x2="15.46" y2="14"/>
+          </svg>
+        </div>
+        <h3 class="download-title">{t('download.extension.title')}</h3>
+        <p class="download-description">{t('download.extension.description')}</p>
+        <a href="https://chrome.google.com/webstore/detail/confia/coming-soon" class="btn btn-primary download-cta" target="_blank" rel="noopener noreferrer">
+          {t('download.extension.cta')}
+        </a>
+      </div>
+
+      <div class="download-card">
+        <div class="download-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </div>
+        <h3 class="download-title">{t('download.api.title')}</h3>
+        <p class="download-description">{t('download.api.description')}</p>
+        <a href="/docs" class="btn btn-secondary download-cta">
+          {t('download.api.cta')}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .download {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-background);
+  }
+
+  .download-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    color: var(--color-heading);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .download-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin: 0 auto;
+    max-width: 900px;
+  }
+
+  .download-card {
+    background: white;
+    border-radius: 1rem;
+    padding: var(--spacing-lg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .download-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .download-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+  }
+
+  .download-title {
+    font-size: 1.5rem;
+    color: var(--color-heading);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .download-description {
+    color: var(--color-text);
+    margin-bottom: var(--spacing-lg);
+    flex-grow: 1;
+  }
+
+  .download-cta {
+    width: 100%;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+    }
+
+    .download-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+  }
+</style>

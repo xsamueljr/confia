@@ -1,0 +1,193 @@
+---
+import { getLangFromUrl, useTranslations } from '../utils/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const navItems = [
+  { href: "#features", text: t('nav.features') },
+  { href: "#pricing", text: t('nav.pricing') },
+  { href: "#download", text: t('nav.download') },
+  { href: "#contact", text: t('nav.contact') },
+];
+
+const alternateLanguage = lang === 'en' ? 'es' : 'en';
+const currentPath = Astro.url.pathname.replace(`/${lang}`, '') || '/';
+const alternateUrl = `/${alternateLanguage}${currentPath}`;
+---
+
+<header class="header">
+  <div class="container header-container">
+    <a href="/" class="logo">
+      <span class="logo-text">confIA</span>
+    </a>
+
+    <button class="mobile-menu-btn" aria-label="Toggle menu" id="menuButton">
+      <span class="hamburger"></span>
+    </button>
+
+    <nav class="nav">
+      <ul class="nav-list">
+        {navItems.map((item) => (
+          <li>
+            <a href={item.href} class="nav-link">{item.text}</a>
+          </li>
+        ))}
+        <li>
+          <a href={alternateUrl} class="nav-link language-switch">
+            {alternateLanguage.toUpperCase()}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--color-secondary-100);
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+  }
+
+  .logo {
+    text-decoration: none;
+  }
+
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .nav-list {
+    display: flex;
+    gap: var(--spacing-md);
+    list-style: none;
+  }
+
+  .nav-link {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-primary);
+  }
+
+  .language-switch {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 0.25rem;
+  }
+
+  .language-switch:hover {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .hamburger {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-text);
+    position: relative;
+    transition: background 0.2s ease;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: var(--color-text);
+    transition: transform 0.2s ease;
+  }
+
+  .hamburger::before {
+    top: -6px;
+  }
+
+  .hamburger::after {
+    bottom: -6px;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-menu-btn {
+      display: block;
+    }
+
+    .nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: var(--spacing-md);
+      border-bottom: 1px solid var(--color-secondary-100);
+      display: none;
+    }
+
+    .nav.active {
+      display: block;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .mobile-menu-btn.active .hamburger {
+      background: transparent;
+    }
+
+    .mobile-menu-btn.active .hamburger::before {
+      transform: rotate(45deg) translate(4px, 4px);
+    }
+
+    .mobile-menu-btn.active .hamburger::after {
+      transform: rotate(-45deg) translate(4px, -4px);
+    }
+  }
+</style>
+
+<script>
+  const menuButton = document.getElementById('menuButton');
+  const nav = document.querySelector('.nav');
+
+  menuButton?.addEventListener('click', () => {
+    menuButton.classList.toggle('active');
+    nav?.classList.toggle('active');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!menuButton?.contains(e.target as Node) && !nav?.contains(e.target as Node)) {
+      menuButton?.classList.remove('active');
+      nav?.classList.remove('active');
+    }
+  });
+</script>

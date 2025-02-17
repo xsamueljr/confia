@@ -1,0 +1,211 @@
+---
+import { getLangFromUrl, useTranslations } from '../utils/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const plans = [
+  {
+    id: 'free',
+    title: t('pricing.free.title'),
+    price: t('pricing.free.price'),
+    period: t('pricing.free.period'),
+    description: t('pricing.free.description'),
+    features: t('pricing.free.features'),
+    cta: t('pricing.free.cta'),
+    popular: false,
+  },
+  {
+    id: 'premium',
+    title: t('pricing.premium.title'),
+    price: t('pricing.premium.price'),
+    period: t('pricing.premium.period'),
+    description: t('pricing.premium.description'),
+    features: t('pricing.premium.features'),
+    cta: t('pricing.premium.cta'),
+    popular: true,
+  },
+  {
+    id: 'business',
+    title: t('pricing.business.title'),
+    price: t('pricing.business.price'),
+    period: t('pricing.business.period'),
+    description: t('pricing.business.description'),
+    features: t('pricing.business.features'),
+    cta: t('pricing.business.cta'),
+    popular: false,
+  },
+];
+---
+
+<section id="pricing" class="pricing">
+  <div class="container">
+    <div class="pricing-header">
+      <h2 class="section-title">{t('pricing.title')}</h2>
+      <p class="section-subtitle">{t('pricing.subtitle')}</p>
+    </div>
+
+    <div class="pricing-grid">
+      {plans.map((plan) => (
+        <div class={`pricing-card ${plan.popular ? 'popular' : ''}`}>
+          {plan.popular && (
+            <div class="popular-badge">{t('pricing.popular')}</div>
+          )}
+          <h3 class="pricing-title">{plan.title}</h3>
+          <div class="pricing-price">
+            <span class="amount">{plan.price}</span>
+            <span class="period">{plan.period}</span>
+          </div>
+          <p class="pricing-description">{plan.description}</p>
+          <ul class="pricing-features">
+            {plan.features.map((feature) => (
+              <li class="pricing-feature">{feature}</li>
+            ))}
+          </ul>
+          <a href={`#${plan.id}`} class={`btn ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}>
+            {plan.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-secondary-100);
+  }
+
+  .pricing-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    color: var(--color-heading);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+
+  .pricing-card {
+    background: white;
+    border-radius: 1rem;
+    padding: var(--spacing-lg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pricing-card.popular {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--color-primary);
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--color-primary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .pricing-title {
+    font-size: 1.5rem;
+    color: var(--color-heading);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .pricing-price {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-heading);
+  }
+
+  .period {
+    color: var(--color-text);
+    font-size: 1rem;
+  }
+
+  .pricing-description {
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .pricing-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--spacing-lg);
+    flex-grow: 1;
+  }
+
+  .pricing-feature {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text);
+  }
+
+  .pricing-feature::before {
+    content: '✓';
+    color: var(--color-primary);
+    margin-right: var(--spacing-xs);
+    font-weight: bold;
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+    }
+
+    .pricing-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .pricing-card.popular {
+      transform: none;
+    }
+  }
+</style>
