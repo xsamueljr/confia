@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../utils/i18n';
+import { PATH_TO } from '../utils/redirections';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -13,7 +14,7 @@ const navItems = [
 
 const alternateLanguage = lang === 'en' ? 'es' : 'en';
 const currentPath = Astro.url.pathname.replace(`/${lang}`, '') || '/';
-const alternateUrl = `/${alternateLanguage}${currentPath}`;
+const alternateUrl = `${alternateLanguage === 'es' ? PATH_TO.ES : PATH_TO.EN}${currentPath}`;
 ---
 
 <header class="header">
